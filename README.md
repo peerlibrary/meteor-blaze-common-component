@@ -22,13 +22,13 @@ meteor add peerlibrary:blaze-common-component
 Usage
 -----
 
-This package simply supersedes [Blaze Components](https://github.com/peerlibrary/meteor-blaze-components)
-package. Instead of using Blaze Components package, replace it with a dependency on this package.
+You can use `CommonComponent` as a base class for your components and `CommonMixin` for your mixins.
+
 The idea is that instead of using Blaze global template helpers you can simply use methods shared
-between all your components by using a common base class with them. In this way interaction between
+between all your components by using a common base class for them. In this way interaction between
 helpers is much cleaner and can nicely tie into the rest of the object-oriented programming.
 
-Then, use `CommonComponent` as a base class for your components and `CommonMixin` for your mixins.
+This package provides some common features community found useful in their components.
 
 See [code itself](https://github.com/peerlibrary/meteor-blaze-common-component/blob/master/base.coffee) for
 documentation of available features in code comments.

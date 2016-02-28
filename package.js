@@ -29,10 +29,6 @@ Package.onUse(function (api) {
     'kadira:flow-router@2.10.1'
   ], {weak: true});
 
-  api.imply([
-    'peerlibrary:blaze-components'
-  ]);
-
   api.export('CommonComponent');
   api.export('CommonMixin');
 
