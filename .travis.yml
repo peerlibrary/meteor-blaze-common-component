@@ -4,3 +4,5 @@ node_js:
 sudo: required
 before_install:
   - "curl -L http://git.io/ejPSng | /bin/sh"
+after_success:
+  - "./.documentation.sh"
