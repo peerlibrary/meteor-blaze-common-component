@@ -28,9 +28,13 @@ invalidateAfter = (expirationMs) ->
     Meteor.clearTimeout handle if handle
     handle = null
 
-class CommonComponent extends BlazeComponent
-  # A version of BlazeComponent.subscribe which logs errors to the console if no error callback is specified.
-  subscribe: (args...) ->
+# A common base class for both {CommonComponent} and {CommonMixin}.
+class CommonComponentBase extends BlazeComponent
+  # A version of [subscribe](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_subscribe)
+  # which logs errors to the console if no error callback is specified.
+  #
+  # @return [SubscriptionHandle]
+  subscribe: (name, args...) ->
     lastArgument = args[args.length - 1]
 
     callbacks = {}
@@ -45,8 +49,40 @@ class CommonComponent extends BlazeComponent
 
     args.push callbacks
 
-    super args...
+    super name, args...
 
+  # Traverses the components tree towards the root and returns the first component which is an instance of
+  # `componentClass`.
+  #
+  # @param [Class<componentClass>] componentClass
+  # @return [BlazeComponent]
+  ancestorComponent: (componentClass) ->
+    component = @parentComponent()
+    while component and component not instanceof componentClass
+      component = component.parentComponent()
+    component
+
+  # Traverses the components tree towards the root and finds the first component with a property `propertyName`
+  # and if it is a function, calls it with `args` arguments, otherwise returns the value of the property.
+  #
+  # @param [String] propertyName
+  # @return [anything]
+  callAncestorWith: (propertyName, args...) ->
+    component = @parentComponent()
+    while component and not component.getFirstWith null, propertyName
+      component = component.parentComponent()
+    component?.callFirstWith null, propertyName, args...
+
+# A base class for components with additional methods for various useful features.
+#
+# In addition to methods/template helpers available when using this class as a base
+# class, [`insertDOMElement`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_insertDOMElement),
+# [`moveDOMElement`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_moveDOMElement),
+# and [`removeDOMElement`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_removeDOMElement) have been
+# configured to call corresponding methods in mixins, if they exist, as it is
+# described [in Blaze Components documentation](https://github.com/peerlibrary/meteor-blaze-components#animations).
+# This allows you to use mixins which add animations to your components.
+class CommonComponent extends CommonComponentBase
   pathFor: (pathName, kwargs) ->
     params = kwargs?.hash?.params or {}
     queryParams = kwargs?.hash?.query or {}
@@ -59,18 +95,6 @@ class CommonComponent extends BlazeComponent
 
   currentUser: ->
     Meteor.user()
-
-  ancestorComponent: (componentClass) ->
-    component = @parentComponent()
-    while component and component not instanceof componentClass
-      component = component.parentComponent()
-    component
-
-  callAncestorWith: (propertyName, args...) ->
-    component = @parentComponent()
-    while component and not component.getFirstWith null, propertyName
-      component = component.parentComponent()
-    component?.callFirstWith null, propertyName, args...
 
   $or: (args...) ->
     # Removing kwargs.
@@ -96,6 +120,7 @@ class CommonComponent extends BlazeComponent
 
     args.join delimiter
 
+  # @nodoc
   insertDOMElement: (parent, node, before, next) ->
     next ?= =>
       super parent, node, before
@@ -106,6 +131,7 @@ class CommonComponent extends BlazeComponent
     # It has been handled.
     true
 
+  # @nodoc
   moveDOMElement: (parent, node, before, next) ->
     next ?= =>
       super parent, node, before
@@ -116,6 +142,7 @@ class CommonComponent extends BlazeComponent
     # It has been handled.
     true
 
+  # @nodoc
   removeDOMElement: (parent, node, next) ->
     next ?= =>
       super parent, node
@@ -245,12 +272,51 @@ class CommonComponent extends BlazeComponent
       @_cssPrefix = (_.toArray(styles).join('').match(/-(moz|webkit|ms)-/) or (styles.OLink is '' and ['', 'o']))[1]
     @_cssPrefix
 
-class CommonMixin extends BlazeComponent
-  data: ->
-    @mixinParent().data()
+# A base class for mixins which calls the following methods on the
+# [mixin parent](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_mixinParent)
+# instead of the mixin itself:
+#
+# * [`$`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_$)
+# * [`find`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_find)
+# * [`findAll`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_findAll)
+# * [`firstNode`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_firstNode)
+# * [`lastNode`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_lastNode)
+# * [`data`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_data)
+# * [`component`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_component)
+# * [`parentComponent`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_parentComponent)
+# * [`childComponents`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_childComponents)
+# * [`childComponentsWith`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_childComponentsWith)
+# * [`isCreated`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_isCreated)
+# * [`isRendered`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_isRendered)
+# * [`isDestroyed`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_isDestroyed)
+# * [`renderComponent`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_renderComponent)
+# * [`removeComponent`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_removeComponent)
+# * [`renderComponentToHTML`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_renderComponentToHTML)
+# * [`autorun`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_autorun)
+# * {CommonComponentBase#subscribe `subscribe`}
+# * [`subscriptionsReady`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_subscriptionsReady)
+# * [`getMixin`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_getMixin)
+# * [`getFirstWith`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_getFirstWith)
+# * [`callFirstWith`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_callFirstWith)
+# * [`requireMixin`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_requireMixin)
+# * {CommonComponentBase#ancestorComponent `ancestorComponent`}
+# * {CommonComponentBase#callAncestorWith `callAncestorWith`}
+#
+# The following class methods are not available for mixins and throw an error:
+#
+# * [`register`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_class_register)
+# * [`renderComponent`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_class_renderComponent)
+# * [`renderComponentToHTML`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_class_renderComponentToHTML)
+#
+class CommonMixin extends CommonComponentBase
 
-  callFirstWith: (args...) ->
-    @mixinParent().callFirstWith args...
+for classMethod in ['register', 'renderComponent', 'renderComponentToHTML']
+  CommonMixin[classMethod] = ->
+    throw new Error "Not available for mixins."
 
-  autorun: (args...) ->
-    @mixinParent().autorun args...
+for method in ['$', 'find', 'findAll', 'firstNode', 'lastNode', 'data', 'component', 'parentComponent',
+               'childComponents', 'childComponentsWith', 'isCreated', 'isRendered', 'isDestroyed', 'renderComponent',
+               'removeComponent', 'renderComponentToHTML', 'autorun', 'subscribe', 'subscriptionsReady', 'getMixin',
+               'getFirstWith', 'callFirstWith', 'requireMixin', 'ancestorComponent', 'callAncestorWith']
+  CommonMixin::[method] = (args...) ->
+    @mixinParent()[method] args...

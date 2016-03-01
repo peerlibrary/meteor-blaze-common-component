@@ -22,16 +22,15 @@ meteor add peerlibrary:blaze-common-component
 Usage
 -----
 
-You can use `CommonComponent` as a base class for your components and `CommonMixin` for your mixins.
+You can use [`CommonComponent`](https://peerlibrary.github.io/meteor-blaze-common-component/class/CommonComponent.html)
+as a base class for your components and
+[`CommonMixin`](https://peerlibrary.github.io/meteor-blaze-common-component/class/CommonMixin.html) for your mixins.
 
 The idea is that instead of using Blaze global template helpers you can simply use methods shared
 between all your components by using a common base class for them. In this way interaction between
 helpers is much cleaner and can nicely tie into the rest of the object-oriented programming.
 
 This package provides some common features community found useful in their components.
-
-See [code itself](https://github.com/peerlibrary/meteor-blaze-common-component/blob/master/base.coffee) for
-documentation of available features in code comments.
 
 The suggested pattern is that in your application your first extend the `CommonComponent` with an app-level
 base class for all your components in the app, and then use that app-level base class in your app. Something
@@ -51,3 +50,9 @@ BlogPostComponent.regisiter('BlogPostComponent');
 
 In this way it is easy to later on add new features app-wide. And remember, if some feature is very
 useful to you, it will probably be useful to others as well. Consider contributing it to this package.
+
+Available features
+------------------
+
+See [generated documentation](https://peerlibrary.github.io/meteor-blaze-common-component/) for documentation
+of all features available.
