@@ -20,7 +20,7 @@ codo base.coffee --output ./doc --name 'Common Component' --title 'Common Compon
 cd $HOME
 git config --global user.email "travis@travis-ci.org"
 git config --global user.name "Travis CI"
-git config credential.helper store
+git config --global credential.helper store
 
 echo "https://mitar:${GH_TOKEN}@github.com" > .git-credentials
 
