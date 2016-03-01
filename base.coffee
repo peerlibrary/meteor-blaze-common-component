@@ -74,29 +74,25 @@ class CommonComponent extends BlazeComponent
 
   $or: (args...) ->
     # Removing kwargs.
-    assert args[args.length - 1] instanceof Spacebars.kw
-    args.pop()
+    args.pop() if args[args.length - 1] instanceof Spacebars.kw
 
     _.some args
 
   $and: (args...) ->
     # Removing kwargs.
-    assert args[args.length - 1] instanceof Spacebars.kw
-    args.pop()
+    args.pop() if args[args.length - 1] instanceof Spacebars.kw
 
     _.every args
 
   $not: (args...) ->
     # Removing kwargs.
-    assert args[args.length - 1] instanceof Spacebars.kw
-    args.pop()
+    args.pop() if args[args.length - 1] instanceof Spacebars.kw
 
     not args[0]
 
   $join: (delimiter, args...) ->
     # Removing kwargs.
-    assert args[args.length - 1] instanceof Spacebars.kw
-    args.pop()
+    args.pop() if args[args.length - 1] instanceof Spacebars.kw
 
     args.join delimiter
 
@@ -249,7 +245,7 @@ class CommonComponent extends BlazeComponent
       @_cssPrefix = (_.toArray(styles).join('').match(/-(moz|webkit|ms)-/) or (styles.OLink is '' and ['', 'o']))[1]
     @_cssPrefix
 
-class CommonMixin extends UIComponent
+class CommonMixin extends BlazeComponent
   data: ->
     @mixinParent().data()
 

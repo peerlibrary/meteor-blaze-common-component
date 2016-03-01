@@ -11,7 +11,7 @@ Package.onUse(function (api) {
   // Core dependencies.
   api.use([
     'coffeescript',
-    'underscore-extra',
+    'underscore',
     'spacebars',
     'tracker'
   ]);
@@ -35,4 +35,25 @@ Package.onUse(function (api) {
   api.addFiles([
     'base.coffee'
   ]);
+});
+
+Package.onTest(function (api) {
+  // Core dependencies.
+  api.use([
+    'coffeescript'
+  ]);
+
+  // Internal dependencies.
+  api.use([
+    'peerlibrary:blaze-common-component'
+  ]);
+
+  // 3rd party dependencies.
+  api.use([
+    'peerlibrary:classy-test@0.2.24'
+  ]);
+
+  api.addFiles([
+    'tests.coffee'
+   ]);
 });
