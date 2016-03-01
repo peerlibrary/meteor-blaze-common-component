@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset='UTF-8'>
+  <title>Common Component Documentation</title>
+  <script src='../javascript/application.js'></script>
+  <script src='../javascript/search.js'></script>
+  <link rel='stylesheet' href='../stylesheets/application.css' type='text/css'>
+</head>
+  <body>
+    <div id='base' data-path='../'></div>
+<div id='header'>
+  <div id='menu'>
+    <a href='../extra/README.md.html' title='Common Component'>
+      Common Component
+    </a>
+    &raquo;
+    <a href='../alphabetical_index.html' title='Index'>
+      Index
+    </a>
+    &raquo;
+    <span class='title'>CommonComponentBase</span>
+  </div>
+</div>
+    <div id='content'>
+      <h1>
+        Class:
+        CommonComponentBase
+      </h1>
+      <table class='box'>
+        <tr>
+          <td>Defined in:</td>
+          <td>base.coffee</td>
+        </tr>
+        <tr>
+          <td>Inherits:</td>
+          <td>
+            BlazeComponent
+          </td>
+        </tr>
+      </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <p>A common base class for both <a href='../class/CommonComponent.html'>CommonComponent</a> and <a href='../class/CommonMixin.html'>CommonMixin</a>.</p>
+</div>
+<div class='tags'>
+</div>
+      <h2>Direct Known Subclasses</h2>
+      <p class='children'>
+        <a href='../class/CommonComponent.html'>CommonComponent</a>
+        <a href='../class/CommonMixin.html'>CommonMixin</a>
+      </p>
+      <h2>Instance Method Summary</h2>
+      <ul class='summary'>
+  <li>
+    <span class='signature'>
+      <a href='#subscribe-dynamic'>
+        #
+(SubscriptionHandle)
+<b>subscribe</b><span>(name, args...)</span>
+      </a>
+    </span>
+    <span class='desc'>
+      A version of <a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_subscribe">subscribe</a> which logs errors to the console if no error callback is specified.
+
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#ancestorComponent-dynamic'>
+        #
+(BlazeComponent)
+<b>ancestorComponent</b><span>(componentClass)</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Traverses the components tree towards the root and returns the first component which is an instance of <code>componentClass</code>.
+
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#callAncestorWith-dynamic'>
+        #
+(anything)
+<b>callAncestorWith</b><span>(propertyName, args...)</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Traverses the components tree towards the root and finds the first component with a property <code>propertyName</code> and if it is a function, calls it with <code>args</code> arguments, otherwise returns the value of the property.
+
+    </span>
+  </li>
+</ul>
+      <h2>Instance Method Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='subscribe-dynamic'>
+      #
+(SubscriptionHandle)
+<b>subscribe</b><span>(name, args...)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>A version of <a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_subscribe">subscribe</a>
+which logs errors to the console if no error callback is specified.</p>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>SubscriptionHandle</tt>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='ancestorComponent-dynamic'>
+      #
+(BlazeComponent)
+<b>ancestorComponent</b><span>(componentClass)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Traverses the components tree towards the root and returns the first component which is an instance of
+<code>componentClass</code>.</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>componentClass</span>
+      <span class='type'>
+        (
+          <tt>Class&lt;componentClass&gt;</tt>
+        )
+      </span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>BlazeComponent</tt>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='callAncestorWith-dynamic'>
+      #
+(anything)
+<b>callAncestorWith</b><span>(propertyName, args...)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Traverses the components tree towards the root and finds the first component with a property <code>propertyName</code>
+and if it is a function, calls it with <code>args</code> arguments, otherwise returns the value of the property.</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>propertyName</span>
+      <span class='type'>
+        (
+          <tt>String</tt>
+        )
+      </span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>anything</tt>
+    </li>
+  </ul>
+</div>
+  </div>
+</div>
+    </div>
+    <div id='footer'>
+  By
+  <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
+    Codo
+  </a>
+  2.1.0
+  &#10034;
+  Press H to see the keyboard shortcuts
+  &#10034;
+  <a href='http://twitter.com/netzpirat' target='_parent'>@netzpirat</a>
+  &#10034;
+  <a href='http://twitter.com/_inossidabile' target='_parent'>@_inossidabile</a>
+</div>
+<iframe id='search_frame'></iframe>
+<div id='fuzzySearch'>
+  <input type='text'>
+  <ol></ol>
+</div>
+<div id='help'>
+  <p>
+    Quickly fuzzy find classes, mixins, methods, file:
+  </p>
+  <ul>
+    <li>
+      <span>T</span>
+      Open fuzzy finder dialog
+    </li>
+  </ul>
+  <p>
+    Control the navigation frame:
+  </p>
+  <ul>
+    <li>
+      <span>L</span>
+      Toggle list view
+    </li>
+    <li>
+      <span>C</span>
+      Show class list
+    </li>
+    <li>
+      <span>I</span>
+      Show mixin list
+    </li>
+    <li>
+      <span>F</span>
+      Show file list
+    </li>
+    <li>
+      <span>M</span>
+      Show method list
+    </li>
+    <li>
+      <span>E</span>
+      Show extras list
+    </li>
+  </ul>
+  <p>
+    You can focus and blur the search input:
+  </p>
+  <ul>
+    <li>
+      <span>S</span>
+      Focus search input
+    </li>
+    <li>
+      <span>Esc</span>
+      Blur search input
+    </li>
+  </ul>
+</div>
+  </body>
+</html>

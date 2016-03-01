@@ -39,10 +39,11 @@ extended with common features.</p><p>Adding this package to your <a href="http:/
 <code>CommonMixin</code> classes into the global scope.</p><p><strong>Pull requests with new features are more than encouraged.</strong> Let us all combine our common practices and
 patterns together. We can always split it later into smaller packages.</p><p>Both client and server side.</p><h2 id="installation">Installation</h2>
 <pre><code>meteor add peerlibrary:blaze-common-component
-</code></pre><h2 id="usage">Usage</h2><p>You can use <code>CommonComponent</code> as a base class for your components and <code>CommonMixin</code> for your mixins.</p><p>The idea is that instead of using Blaze global template helpers you can simply use methods shared
+</code></pre><h2 id="usage">Usage</h2><p>You can use <a href="https://peerlibrary.github.io/meteor-blaze-common-component/class/CommonComponent.html"><code>CommonComponent</code></a>
+as a base class for your components and
+<a href="https://peerlibrary.github.io/meteor-blaze-common-component/class/CommonMixin.html"><code>CommonMixin</code></a> for your mixins.</p><p>The idea is that instead of using Blaze global template helpers you can simply use methods shared
 between all your components by using a common base class for them. In this way interaction between
-helpers is much cleaner and can nicely tie into the rest of the object-oriented programming.</p><p>This package provides some common features community found useful in their components.</p><p>See <a href="https://github.com/peerlibrary/meteor-blaze-common-component/blob/master/base.coffee">code itself</a> for
-documentation of available features in code comments.</p><p>The suggested pattern is that in your application your first extend the <code>CommonComponent</code> with an app-level
+helpers is much cleaner and can nicely tie into the rest of the object-oriented programming.</p><p>This package provides some common features community found useful in their components.</p><p>The suggested pattern is that in your application your first extend the <code>CommonComponent</code> with an app-level
 base class for all your components in the app, and then use that app-level base class in your app. Something
 like:</p><pre><code class="lang-javascript">class AppBaseComponent extends CommonComponent {
   // All app-level methods.
@@ -54,7 +55,8 @@ class BlogPostComponent extends AppBaseComponent {
 
 BlogPostComponent.regisiter(&#39;BlogPostComponent&#39;);
 </code></pre><p>In this way it is easy to later on add new features app-wide. And remember, if some feature is very
-useful to you, it will probably be useful to others as well. Consider contributing it to this package.</p>
+useful to you, it will probably be useful to others as well. Consider contributing it to this package.</p><h2 id="available-features">Available features</h2><p>See <a href="https://peerlibrary.github.io/meteor-blaze-common-component/">generated documentation</a> for documentation
+of all features available.</p>
       </div>
     </div>
     <div id='footer'>

@@ -35,10 +35,22 @@
         <tr>
           <td>Inherits:</td>
           <td>
-            BlazeComponent
+            <a href='../class/CommonComponentBase.html'>CommonComponentBase</a>
           </td>
         </tr>
       </table>
+      <h2>Overview</h2>
+      <div class='docstring'>
+  <p>A base class for components with additional methods for various useful features.</p><p>In addition to methods/template helpers available when using this class as a base
+class, <a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_insertDOMElement"><code>insertDOMElement</code></a>,
+<a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_moveDOMElement"><code>moveDOMElement</code></a>,
+and <a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_removeDOMElement"><code>removeDOMElement</code></a> have been
+configured to call corresponding methods in mixins, if they exist, as it is
+described <a href="https://github.com/peerlibrary/meteor-blaze-components#animations">in Blaze Components documentation</a>.
+This allows you to use mixins which add animations to your components.</p>
+</div>
+<div class='tags'>
+</div>
       <h2>Variables Summary</h2>
       <dl class='constants'>
   <dt id='DEFAULT_DATETIME_FORMAT-variable'>
@@ -70,18 +82,6 @@
       <ul class='summary'>
   <li>
     <span class='signature'>
-      <a href='#subscribe-dynamic'>
-        #
-(void)
-<b>subscribe</b><span>(args...)</span>
-      </a>
-    </span>
-    <span class='desc'>
-      A version of BlazeComponent.subscribe which logs errors to the console if no error callback is specified. 
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
       <a href='#pathFor-dynamic'>
         #
 (void)
@@ -97,28 +97,6 @@
         #
 (void)
 <b>currentUser</b><span>()</span>
-      </a>
-    </span>
-    <span class='desc'>
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#ancestorComponent-dynamic'>
-        #
-(void)
-<b>ancestorComponent</b><span>(componentClass)</span>
-      </a>
-    </span>
-    <span class='desc'>
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#callAncestorWith-dynamic'>
-        #
-(void)
-<b>callAncestorWith</b><span>(propertyName, args...)</span>
       </a>
     </span>
     <span class='desc'>
@@ -163,39 +141,6 @@
         #
 (void)
 <b>$join</b><span>(delimiter, args...)</span>
-      </a>
-    </span>
-    <span class='desc'>
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#insertDOMElement-dynamic'>
-        #
-(void)
-<b>insertDOMElement</b><span>(parent, node, before, next)</span>
-      </a>
-    </span>
-    <span class='desc'>
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#moveDOMElement-dynamic'>
-        #
-(void)
-<b>moveDOMElement</b><span>(parent, node, before, next)</span>
-      </a>
-    </span>
-    <span class='desc'>
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#removeDOMElement-dynamic'>
-        #
-(void)
-<b>removeDOMElement</b><span>(parent, node, next)</span>
       </a>
     </span>
     <span class='desc'>
@@ -270,21 +215,20 @@
     </span>
   </li>
 </ul>
+      <h2>
+        <small>Inherited Method Summary</small>
+        <h3 class='inherited'>
+          Methods inherited from
+          <a href='../class/CommonComponentBase.html'>CommonComponentBase</a>
+        </h3>
+        <p class='inherited'>
+          <a href='../class/CommonComponentBase.html#subscribe-dynamic'>#subscribe</a>
+          <a href='../class/CommonComponentBase.html#ancestorComponent-dynamic'>#ancestorComponent</a>
+          <a href='../class/CommonComponentBase.html#callAncestorWith-dynamic'>#callAncestorWith</a>
+        </p>
+      </h2>
       <h2>Instance Method Details</h2>
       <div class='methods'>
-  <div class='method_details'>
-    <p class='signature' id='subscribe-dynamic'>
-      #
-(void)
-<b>subscribe</b><span>(args...)</span>
-      <br>
-    </p>
-    <div class='docstring'>
-  <p>A version of BlazeComponent.subscribe which logs errors to the console if no error callback is specified.</p>
-</div>
-<div class='tags'>
-</div>
-  </div>
   <div class='method_details'>
     <p class='signature' id='pathFor-dynamic'>
       #
@@ -299,24 +243,6 @@
       #
 (void)
 <b>currentUser</b><span>()</span>
-      <br>
-    </p>
-    
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='ancestorComponent-dynamic'>
-      #
-(void)
-<b>ancestorComponent</b><span>(componentClass)</span>
-      <br>
-    </p>
-    
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='callAncestorWith-dynamic'>
-      #
-(void)
-<b>callAncestorWith</b><span>(propertyName, args...)</span>
       <br>
     </p>
     
@@ -353,33 +279,6 @@
       #
 (void)
 <b>$join</b><span>(delimiter, args...)</span>
-      <br>
-    </p>
-    
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='insertDOMElement-dynamic'>
-      #
-(void)
-<b>insertDOMElement</b><span>(parent, node, before, next)</span>
-      <br>
-    </p>
-    
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='moveDOMElement-dynamic'>
-      #
-(void)
-<b>moveDOMElement</b><span>(parent, node, before, next)</span>
-      <br>
-    </p>
-    
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='removeDOMElement-dynamic'>
-      #
-(void)
-<b>removeDOMElement</b><span>(parent, node, next)</span>
       <br>
     </p>
     
