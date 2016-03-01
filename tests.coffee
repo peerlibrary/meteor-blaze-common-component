@@ -3,6 +3,6 @@ class CommonComponentTestCase extends ClassyTestCase
 
   testConstructDatetime: ->
     component = new CommonComponent()
-    @assertEqual component.constructDatetime('2015-01-03', '14:04'), new Date('2015-01-03T22:04:00.000Z')
+    @assertEqual component.constructDatetime('2015-01-03', '14:04'), new Date(2015, 0, 3, 14, 4, 0)
 
 ClassyTestCase.addTest new CommonComponentTestCase()
