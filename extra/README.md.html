@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset='UTF-8'>
+  <title>CoffeeScript API Documentation</title>
+  <script src='../javascript/application.js'></script>
+  <script src='../javascript/search.js'></script>
+  <link rel='stylesheet' href='../stylesheets/application.css' type='text/css'>
+</head>
+  <body>
+    <div id='base' data-path='../'></div>
+<div id='header'>
+  <div id='menu'>
+    <a href='../extra/README.md.html' title='Meteor-blaze-common-component'>
+      Meteor-blaze-common-component
+    </a>
+    &raquo;
+    <a href='../alphabetical_index.html' title='Index'>
+      Index
+    </a>
+    &raquo;
+    <span class='title'>README.md</span>
+  </div>
+</div>
+    <div id='content'>
+      <nav class='toc'>
+        <p class='title'>
+          <a class='hide_toc' href='#'>
+            <strong>Table of Contents</strong>
+          </a>
+          <small>
+            (<a class='float_toc' href='#'>left</a>)
+          </small>
+        </p>
+      </nav>
+      <div id='filecontents'>
+        <h1 id="common-component">Common Component</h1><p>An alternative base <a href="https://github.com/peerlibrary/meteor-blaze-components">Blaze Component</a>
+extended with common features.</p><p>Adding this package to your <a href="http://www.meteor.com/">Meteor</a> application adds <code>CommonComponent</code> and
+<code>CommonMixin</code> classes into the global scope.</p><p><strong>Pull requests with new features are more than encouraged.</strong> Let us all combine our common practices and
+patterns together. We can always split it later into smaller packages.</p><p>Both client and server side.</p><h2 id="installation">Installation</h2>
+<pre><code>meteor add peerlibrary:blaze-common-component
+</code></pre><h2 id="usage">Usage</h2><p>You can use <code>CommonComponent</code> as a base class for your components and <code>CommonMixin</code> for your mixins.</p><p>The idea is that instead of using Blaze global template helpers you can simply use methods shared
+between all your components by using a common base class for them. In this way interaction between
+helpers is much cleaner and can nicely tie into the rest of the object-oriented programming.</p><p>This package provides some common features community found useful in their components.</p><p>See <a href="https://github.com/peerlibrary/meteor-blaze-common-component/blob/master/base.coffee">code itself</a> for
+documentation of available features in code comments.</p><p>The suggested pattern is that in your application your first extend the <code>CommonComponent</code> with an app-level
+base class for all your components in the app, and then use that app-level base class in your app. Something
+like:</p><pre><code class="lang-javascript">class AppBaseComponent extends CommonComponent {
+  // All app-level methods.
+}
+
+class BlogPostComponent extends AppBaseComponent {
+  // Your component for blog posts.
+}
+
+BlogPostComponent.regisiter(&#39;BlogPostComponent&#39;);
+</code></pre><p>In this way it is easy to later on add new features app-wide. And remember, if some feature is very
+useful to you, it will probably be useful to others as well. Consider contributing it to this package.</p>
+      </div>
+    </div>
+    <div id='footer'>
+  By
+  <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
+    Codo
+  </a>
+  2.1.0
+  &#10034;
+  Press H to see the keyboard shortcuts
+  &#10034;
+  <a href='http://twitter.com/netzpirat' target='_parent'>@netzpirat</a>
+  &#10034;
+  <a href='http://twitter.com/_inossidabile' target='_parent'>@_inossidabile</a>
+</div>
+<iframe id='search_frame'></iframe>
+<div id='fuzzySearch'>
+  <input type='text'>
+  <ol></ol>
+</div>
+<div id='help'>
+  <p>
+    Quickly fuzzy find classes, mixins, methods, file:
+  </p>
+  <ul>
+    <li>
+      <span>T</span>
+      Open fuzzy finder dialog
+    </li>
+  </ul>
+  <p>
+    Control the navigation frame:
+  </p>
+  <ul>
+    <li>
+      <span>L</span>
+      Toggle list view
+    </li>
+    <li>
+      <span>C</span>
+      Show class list
+    </li>
+    <li>
+      <span>I</span>
+      Show mixin list
+    </li>
+    <li>
+      <span>F</span>
+      Show file list
+    </li>
+    <li>
+      <span>M</span>
+      Show method list
+    </li>
+    <li>
+      <span>E</span>
+      Show extras list
+    </li>
+  </ul>
+  <p>
+    You can focus and blur the search input:
+  </p>
+  <ul>
+    <li>
+      <span>S</span>
+      Focus search input
+    </li>
+    <li>
+      <span>Esc</span>
+      Blur search input
+    </li>
+  </ul>
+</div>
+  </body>
+</html>

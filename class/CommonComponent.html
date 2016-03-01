@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta charset='UTF-8'>
+  <title>CoffeeScript API Documentation</title>
+  <script src='../javascript/application.js'></script>
+  <script src='../javascript/search.js'></script>
+  <link rel='stylesheet' href='../stylesheets/application.css' type='text/css'>
+</head>
+  <body>
+    <div id='base' data-path='../'></div>
+<div id='header'>
+  <div id='menu'>
+    <a href='../extra/README.md.html' title='Meteor-blaze-common-component'>
+      Meteor-blaze-common-component
+    </a>
+    &raquo;
+    <a href='../alphabetical_index.html' title='Index'>
+      Index
+    </a>
+    &raquo;
+    <span class='title'>CommonComponent</span>
+  </div>
+</div>
+    <div id='content'>
+      <h1>
+        Class:
+        CommonComponent
+      </h1>
+      <table class='box'>
+        <tr>
+          <td>Defined in:</td>
+          <td>base.coffee</td>
+        </tr>
+        <tr>
+          <td>Inherits:</td>
+          <td>
+            BlazeComponent
+          </td>
+        </tr>
+      </table>
+      <h2>Variables Summary</h2>
+      <dl class='constants'>
+  <dt id='DEFAULT_DATETIME_FORMAT-variable'>
+    DEFAULT_DATETIME_FORMAT
+    =
+  </dt>
+  <dd>
+    <pre><code class='coffeescript'>&#39;llll&#39;</code></pre>
+    
+  </dd>
+  <dt id='DEFAULT_DATE_FORMAT-variable'>
+    DEFAULT_DATE_FORMAT
+    =
+  </dt>
+  <dd>
+    <pre><code class='coffeescript'>&#39;ll&#39;</code></pre>
+    
+  </dd>
+  <dt id='DEFAULT_TIME_FORMAT-variable'>
+    DEFAULT_TIME_FORMAT
+    =
+  </dt>
+  <dd>
+    <pre><code class='coffeescript'>&#39;LT&#39;</code></pre>
+    
+  </dd>
+</dl>
+      <h2>Instance Method Summary</h2>
+      <ul class='summary'>
+  <li>
+    <span class='signature'>
+      <a href='#subscribe-dynamic'>
+        #
+(void)
+<b>subscribe</b><span>(args...)</span>
+      </a>
+    </span>
+    <span class='desc'>
+      A version of BlazeComponent.subscribe which logs errors to the console if no error callback is specified. 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#pathFor-dynamic'>
+        #
+(void)
+<b>pathFor</b><span>(pathName, kwargs)</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#currentUser-dynamic'>
+        #
+(void)
+<b>currentUser</b><span>()</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#ancestorComponent-dynamic'>
+        #
+(void)
+<b>ancestorComponent</b><span>(componentClass)</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#callAncestorWith-dynamic'>
+        #
+(void)
+<b>callAncestorWith</b><span>(propertyName, args...)</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#$or-dynamic'>
+        #
+(void)
+<b>$or</b><span>(args...)</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#$and-dynamic'>
+        #
+(void)
+<b>$and</b><span>(args...)</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#$not-dynamic'>
+        #
+(void)
+<b>$not</b><span>(args...)</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#$join-dynamic'>
+        #
+(void)
+<b>$join</b><span>(delimiter, args...)</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#insertDOMElement-dynamic'>
+        #
+(void)
+<b>insertDOMElement</b><span>(parent, node, before, next)</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#moveDOMElement-dynamic'>
+        #
+(void)
+<b>moveDOMElement</b><span>(parent, node, before, next)</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#removeDOMElement-dynamic'>
+        #
+(void)
+<b>removeDOMElement</b><span>(parent, node, next)</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#fromNow-dynamic'>
+        #
+(void)
+<b>fromNow</b><span>(date, withoutSuffix, options)</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#formatDate-dynamic'>
+        #
+(void)
+<b>formatDate</b><span>(date, format)</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#formatDuration-dynamic'>
+        #
+(void)
+<b>formatDuration</b><span>(from, to, size)</span>
+      </a>
+    </span>
+    <span class='desc'>
+      TODO: Support internationalization. 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#constructDatetime-dynamic'>
+        #
+(void)
+<b>constructDatetime</b><span>(date, time)</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Construct a date object from inputs of form fields of type &quot;date&quot; and &quot;time&quot;. 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#calendarDate-dynamic'>
+        #
+(void)
+<b>calendarDate</b><span>(date)</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#cssPrefix-dynamic'>
+        #
+(void)
+<b>cssPrefix</b><span>()</span>
+      </a>
+    </span>
+    <span class='desc'>
+    </span>
+  </li>
+</ul>
+      <h2>Instance Method Details</h2>
+      <div class='methods'>
+  <div class='method_details'>
+    <p class='signature' id='subscribe-dynamic'>
+      #
+(void)
+<b>subscribe</b><span>(args...)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>A version of BlazeComponent.subscribe which logs errors to the console if no error callback is specified.</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='pathFor-dynamic'>
+      #
+(void)
+<b>pathFor</b><span>(pathName, kwargs)</span>
+      <br>
+    </p>
+    
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='currentUser-dynamic'>
+      #
+(void)
+<b>currentUser</b><span>()</span>
+      <br>
+    </p>
+    
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='ancestorComponent-dynamic'>
+      #
+(void)
+<b>ancestorComponent</b><span>(componentClass)</span>
+      <br>
+    </p>
+    
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='callAncestorWith-dynamic'>
+      #
+(void)
+<b>callAncestorWith</b><span>(propertyName, args...)</span>
+      <br>
+    </p>
+    
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='$or-dynamic'>
+      #
+(void)
+<b>$or</b><span>(args...)</span>
+      <br>
+    </p>
+    
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='$and-dynamic'>
+      #
+(void)
+<b>$and</b><span>(args...)</span>
+      <br>
+    </p>
+    
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='$not-dynamic'>
+      #
+(void)
+<b>$not</b><span>(args...)</span>
+      <br>
+    </p>
+    
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='$join-dynamic'>
+      #
+(void)
+<b>$join</b><span>(delimiter, args...)</span>
+      <br>
+    </p>
+    
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='insertDOMElement-dynamic'>
+      #
+(void)
+<b>insertDOMElement</b><span>(parent, node, before, next)</span>
+      <br>
+    </p>
+    
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='moveDOMElement-dynamic'>
+      #
+(void)
+<b>moveDOMElement</b><span>(parent, node, before, next)</span>
+      <br>
+    </p>
+    
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='removeDOMElement-dynamic'>
+      #
+(void)
+<b>removeDOMElement</b><span>(parent, node, next)</span>
+      <br>
+    </p>
+    
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='fromNow-dynamic'>
+      #
+(void)
+<b>fromNow</b><span>(date, withoutSuffix, options)</span>
+      <br>
+    </p>
+    
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='formatDate-dynamic'>
+      #
+(void)
+<b>formatDate</b><span>(date, format)</span>
+      <br>
+    </p>
+    
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='formatDuration-dynamic'>
+      #
+(void)
+<b>formatDuration</b><span>(from, to, size)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>TODO: Support internationalization.</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='constructDatetime-dynamic'>
+      #
+(void)
+<b>constructDatetime</b><span>(date, time)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Construct a date object from inputs of form fields of type &quot;date&quot; and &quot;time&quot;.</p>
+</div>
+<div class='tags'>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='calendarDate-dynamic'>
+      #
+(void)
+<b>calendarDate</b><span>(date)</span>
+      <br>
+    </p>
+    
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='cssPrefix-dynamic'>
+      #
+(void)
+<b>cssPrefix</b><span>()</span>
+      <br>
+    </p>
+    
+  </div>
+</div>
+    </div>
+    <div id='footer'>
+  By
+  <a href='https://github.com/coffeedoc/codo' title='CoffeeScript API documentation generator'>
+    Codo
+  </a>
+  2.1.0
+  &#10034;
+  Press H to see the keyboard shortcuts
+  &#10034;
+  <a href='http://twitter.com/netzpirat' target='_parent'>@netzpirat</a>
+  &#10034;
+  <a href='http://twitter.com/_inossidabile' target='_parent'>@_inossidabile</a>
+</div>
+<iframe id='search_frame'></iframe>
+<div id='fuzzySearch'>
+  <input type='text'>
+  <ol></ol>
+</div>
+<div id='help'>
+  <p>
+    Quickly fuzzy find classes, mixins, methods, file:
+  </p>
+  <ul>
+    <li>
+      <span>T</span>
+      Open fuzzy finder dialog
+    </li>
+  </ul>
+  <p>
+    Control the navigation frame:
+  </p>
+  <ul>
+    <li>
+      <span>L</span>
+      Toggle list view
+    </li>
+    <li>
+      <span>C</span>
+      Show class list
+    </li>
+    <li>
+      <span>I</span>
+      Show mixin list
+    </li>
+    <li>
+      <span>F</span>
+      Show file list
+    </li>
+    <li>
+      <span>M</span>
+      Show method list
+    </li>
+    <li>
+      <span>E</span>
+      Show extras list
+    </li>
+  </ul>
+  <p>
+    You can focus and blur the search input:
+  </p>
+  <ul>
+    <li>
+      <span>S</span>
+      Focus search input
+    </li>
+    <li>
+      <span>Esc</span>
+      Blur search input
+    </li>
+  </ul>
+</div>
+  </body>
+</html>
