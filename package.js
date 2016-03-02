@@ -26,7 +26,8 @@ Package.onUse(function (api) {
   // Optional dependencies.
   api.use([
     'peerlibrary:flow-router@2.10.1_1',
-    'kadira:flow-router@2.10.1'
+    'kadira:flow-router@2.10.1',
+    'peerlibrary:user-extra@0.1.0'
   ], {weak: true});
 
   api.export('CommonComponent');

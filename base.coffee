@@ -83,43 +83,6 @@ class CommonComponentBase extends BlazeComponent
 # described [in Blaze Components documentation](https://github.com/peerlibrary/meteor-blaze-components#animations).
 # This allows you to use mixins which add animations to your components.
 class CommonComponent extends CommonComponentBase
-  pathFor: (pathName, kwargs) ->
-    params = kwargs?.hash?.params or {}
-    queryParams = kwargs?.hash?.query or {}
-
-    FlowRouter = Package['peerlibrary:flow-router']?.FlowRouter or Package['kadira:flow-router']?.FlowRouter
-
-    throw new Error "FlowRouter package missing." unless FlowRouter
-
-    FlowRouter.path pathName, params, queryParams
-
-  currentUser: ->
-    Meteor.user()
-
-  $or: (args...) ->
-    # Removing kwargs.
-    args.pop() if args[args.length - 1] instanceof Spacebars.kw
-
-    _.some args
-
-  $and: (args...) ->
-    # Removing kwargs.
-    args.pop() if args[args.length - 1] instanceof Spacebars.kw
-
-    _.every args
-
-  $not: (args...) ->
-    # Removing kwargs.
-    args.pop() if args[args.length - 1] instanceof Spacebars.kw
-
-    not args[0]
-
-  $join: (delimiter, args...) ->
-    # Removing kwargs.
-    args.pop() if args[args.length - 1] instanceof Spacebars.kw
-
-    args.join delimiter
-
   # @nodoc
   insertDOMElement: (parent, node, before, next) ->
     next ?= =>
@@ -153,6 +116,93 @@ class CommonComponent extends CommonComponentBase
     # It has been handled.
     true
 
+  # Template helper which resolves [Flow Router](https://github.com/kadirahq/flow-router) path definition and arguments to
+  # URL paths using [`FlowRouter.path`](https://github.com/kadirahq/flow-router#flowrouterpathpathdef-params-queryparams).
+  # It works when Flow Router package is available.
+  #
+  # @example
+  #   {{pathFor 'Post.edit' params=data}}
+  #
+  # @param [String] pathName Path name or path definition.
+  # @param [Object] kwargs
+  # @option kwargs [Object] params Parameters to resolve variables in the path.
+  # @option kwargs [Object] query Query string values to be added to the URL path.
+  # @return [String]
+  pathFor: (pathName, kwargs) ->
+    kwargs = kwargs.hash if kwargs instanceof Spacebars.kw
+
+    params = kwargs?.params or {}
+    queryParams = kwargs?.query or {}
+
+    FlowRouter = Package['peerlibrary:flow-router']?.FlowRouter or Package['kadira:flow-router']?.FlowRouter
+
+    throw new Error "FlowRouter package missing." unless FlowRouter
+
+    FlowRouter.path pathName, params, queryParams
+
+  # Returns the [`Meteor.userId()`](http://docs.meteor.com/#/full/meteor_users) value.
+  # Use it instead of [`currentUser`](http://docs.meteor.com/#/full/template_currentuser) template helper when you want
+  # to check only if user is logged in or not.
+  #
+  # @example
+  #   {{#if currentUserId}}
+  #     Logged in.
+  #   {{/if}}
+  #
+  # @return [String]
+  currentUserId: ->
+    Meteor.userId()
+
+  # Extended version of [`currentUser`](http://docs.meteor.com/#/full/template_currentuser) template helper which
+  # can optionally limit fields returned in the user object. This limits template helper's reactivity as well.
+  # It works when [peerlibrary:user-extra](https://github.com/peerlibrary/meteor-user-extra) package is available
+  # and falls back to old behavior if it is not.
+  #
+  # @param [String] userId
+  # @param [Object] fields [MongoDB fields specifier](http://docs.meteor.com/#/full/fieldspecifiers).
+  # @return [Object]
+  currentUser: (userId, fields) ->
+    if not fields and _.isObject userId
+      fields = userId
+      userId = null
+
+    fields = fields.hash if fields instanceof Spacebars.kw
+
+    Meteor.user userId, fields
+
+  $or: (args...) ->
+    # Removing kwargs.
+    args.pop() if args[args.length - 1] instanceof Spacebars.kw
+
+    _.some args
+
+  $and: (args...) ->
+    # Removing kwargs.
+    args.pop() if args[args.length - 1] instanceof Spacebars.kw
+
+    _.every args
+
+  $not: (args...) ->
+    # Removing kwargs.
+    args.pop() if args[args.length - 1] instanceof Spacebars.kw
+
+    not args[0]
+
+  $join: (delimiter, args...) ->
+    # Removing kwargs.
+    args.pop() if args[args.length - 1] instanceof Spacebars.kw
+
+    args.join delimiter
+
+  DEFAULT_DATETIME_FORMAT:
+    'llll'
+
+  DEFAULT_DATE_FORMAT:
+    'll'
+
+  DEFAULT_TIME_FORMAT:
+    'LT'
+
   fromNow: (date, withoutSuffix, options) ->
     if withoutSuffix instanceof Spacebars.kw
       options = withoutSuffix
@@ -167,21 +217,12 @@ class CommonComponent extends CommonComponentBase
 
     momentDate.fromNow withoutSuffix
 
-  DEFAULT_DATETIME_FORMAT:
-    'llll'
-
-  DEFAULT_DATE_FORMAT:
-    'll'
-
-  DEFAULT_TIME_FORMAT:
-    'LT'
-
   formatDate: (date, format) ->
     format = null if format instanceof Spacebars.kw
 
     moment(date).format format
 
-  # TODO: Support internationalization.
+  # @todo Support internationalization.
   formatDuration: (from, to, size) ->
     size = null if size instanceof Spacebars.kw
 
@@ -266,6 +307,9 @@ class CommonComponent extends CommonComponentBase
       nextWeek: 'dddd [at] LT',
       sameElse: @DEFAULT_DATETIME_FORMAT
 
+  # Returns the CSS prefix used by the current browser.
+  #
+  # @return [String]
   cssPrefix: ->
     unless '_cssPrefix' of @
       styles = window.getComputedStyle document.documentElement, ''
