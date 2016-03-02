@@ -51,33 +51,42 @@ This allows you to use mixins which add animations to your components.</p>
 </div>
 <div class='tags'>
 </div>
-      <h2>Variables Summary</h2>
-      <dl class='constants'>
-  <dt id='DEFAULT_DATETIME_FORMAT-variable'>
-    DEFAULT_DATETIME_FORMAT
-    =
-  </dt>
-  <dd>
-    <pre><code class='coffeescript'>&#39;llll&#39;</code></pre>
-    
-  </dd>
-  <dt id='DEFAULT_DATE_FORMAT-variable'>
-    DEFAULT_DATE_FORMAT
-    =
-  </dt>
-  <dd>
-    <pre><code class='coffeescript'>&#39;ll&#39;</code></pre>
-    
-  </dd>
-  <dt id='DEFAULT_TIME_FORMAT-variable'>
-    DEFAULT_TIME_FORMAT
-    =
-  </dt>
-  <dd>
-    <pre><code class='coffeescript'>&#39;LT&#39;</code></pre>
-    
-  </dd>
-</dl>
+      <h2>Property Summary</h2>
+      <dl class='properties'>
+        <dt id='DEFAULT_DATETIME_FORMAT-property'>
+          <span class='signature'>
+            (String)
+            <b>
+              DEFAULT_DATETIME_FORMAT
+            </b>
+          </span>
+        </dt>
+        <dd class='desc'>
+          Default localized date-time format. Example: <code>Thu, Sep 4 1986 8:30 PM</code>. 
+        </dd>
+        <dt id='DEFAULT_DATE_FORMAT-property'>
+          <span class='signature'>
+            (String)
+            <b>
+              DEFAULT_DATE_FORMAT
+            </b>
+          </span>
+        </dt>
+        <dd class='desc'>
+          Default localized date format. Example: <code>Sep 4 1986</code>. 
+        </dd>
+        <dt id='DEFAULT_TIME_FORMAT-property'>
+          <span class='signature'>
+            (String)
+            <b>
+              DEFAULT_TIME_FORMAT
+            </b>
+          </span>
+        </dt>
+        <dd class='desc'>
+          Default localized time format. Example: <code>8:30 PM</code>. 
+        </dd>
+      </dl>
       <h2>Instance Method Summary</h2>
       <ul class='summary'>
   <li>
@@ -122,100 +131,97 @@ This allows you to use mixins which add animations to your components.</p>
     <span class='signature'>
       <a href='#$or-dynamic'>
         #
-(void)
+(Boolean)
 <b>$or</b><span>(args...)</span>
       </a>
     </span>
     <span class='desc'>
+      Returns <code>true</code> if any of the arguments is true. 
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#$and-dynamic'>
         #
-(void)
+(Boolean)
 <b>$and</b><span>(args...)</span>
       </a>
     </span>
     <span class='desc'>
+      Returns <code>true</code> if all of the arguments are true. 
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#$not-dynamic'>
         #
-(void)
+(Boolean)
 <b>$not</b><span>(args...)</span>
       </a>
     </span>
     <span class='desc'>
+      Returns <code>true</code> if the first argument is false, <code>false</code> otherwise. 
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#$join-dynamic'>
         #
-(void)
+(String)
 <b>$join</b><span>(delimiter, args...)</span>
       </a>
     </span>
     <span class='desc'>
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#fromNow-dynamic'>
-        #
-(void)
-<b>fromNow</b><span>(date, withoutSuffix, options)</span>
-      </a>
-    </span>
-    <span class='desc'>
+      Joins arguments using the <code>delimiter</code>. 
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#formatDate-dynamic'>
         #
-(void)
+(String)
 <b>formatDate</b><span>(date, format)</span>
       </a>
     </span>
     <span class='desc'>
+      <a href="http://momentjs.com/docs/#/displaying/format/">Format</a> a datetime using provided <code>format</code> string. 
     </span>
   </li>
   <li>
     <span class='signature'>
-      <a href='#formatDuration-dynamic'>
+      <a href='#fromNow-dynamic'>
         #
-(void)
-<b>formatDuration</b><span>(from, to, size)</span>
+(String)
+<b>fromNow</b><span>(date, withoutSuffix)</span>
       </a>
     </span>
     <span class='desc'>
-    </span>
-  </li>
-  <li>
-    <span class='signature'>
-      <a href='#constructDatetime-dynamic'>
-        #
-(void)
-<b>constructDatetime</b><span>(date, time)</span>
-      </a>
-    </span>
-    <span class='desc'>
-      Construct a date object from inputs of form fields of type &quot;date&quot; and &quot;time&quot;. 
+      Reactively format a datetime into a relative from now and localized string. 
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#calendarDate-dynamic'>
         #
-(void)
+(String)
 <b>calendarDate</b><span>(date)</span>
       </a>
     </span>
     <span class='desc'>
+      Format a datetime into a relative from now and localized string using friendly day names. 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#formatDuration-dynamic'>
+        #
+(String)
+<b>formatDuration</b><span>(from, to, size)</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Similar to <a href="http://momentjs.com/docs/#/durations/humanize/">moment.js <code>humanize</code> function</a> it returns a friendly string representing the duration.
+
     </span>
   </li>
   <li>
@@ -228,6 +234,18 @@ This allows you to use mixins which add animations to your components.</p>
     </span>
     <span class='desc'>
       Returns the CSS prefix used by the current browser. 
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#constructDatetime-dynamic'>
+        #
+(Date)
+<b>constructDatetime</b><span>(date, time)</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Construct a <code>Date</code> object from inputs of HTML5 form fields of type <code>date</code> and <code>time</code>. 
     </span>
   </li>
 </ul>
@@ -338,7 +356,7 @@ to check only if user is logged in or not.</p>
       
     </h4>
     <pre><code class='coffeescript'>{{#if currentUserId}}
-  Logged in.
+  ...
 {{&#47;if}}</code></pre>
   </div>
 </div>
@@ -399,95 +417,331 @@ and falls back to old behavior if it is not.</p>
   <div class='method_details'>
     <p class='signature' id='$or-dynamic'>
       #
-(void)
+(Boolean)
 <b>$or</b><span>(args...)</span>
       <br>
     </p>
-    
+    <div class='docstring'>
+  <p>Returns <code>true</code> if any of the arguments is true.</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      
+    </h4>
+    <pre><code class='coffeescript'>{{#if $or isAdmin isModerator}}
+  ...
+{{&#47;if}}</code></pre>
+  </div>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>Boolean</tt>
+    </li>
+  </ul>
+</div>
   </div>
   <div class='method_details'>
     <p class='signature' id='$and-dynamic'>
       #
-(void)
+(Boolean)
 <b>$and</b><span>(args...)</span>
       <br>
     </p>
-    
+    <div class='docstring'>
+  <p>Returns <code>true</code> if all of the arguments are true.</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      
+    </h4>
+    <pre><code class='coffeescript'>{{#if $and currentUserId subscriptionReady}}
+  ...
+{{&#47;if}}</code></pre>
+  </div>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>Boolean</tt>
+    </li>
+  </ul>
+</div>
   </div>
   <div class='method_details'>
     <p class='signature' id='$not-dynamic'>
       #
-(void)
+(Boolean)
 <b>$not</b><span>(args...)</span>
       <br>
     </p>
-    
+    <div class='docstring'>
+  <p>Returns <code>true</code> if the first argument is false, <code>false</code> otherwise.</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      
+    </h4>
+    <pre><code class='coffeescript'>{{#if $not isRobot}}
+  ...
+{{&#47;if}}</code></pre>
+  </div>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>Boolean</tt>
+    </li>
+  </ul>
+</div>
   </div>
   <div class='method_details'>
     <p class='signature' id='$join-dynamic'>
       #
-(void)
+(String)
 <b>$join</b><span>(delimiter, args...)</span>
       <br>
     </p>
-    
+    <div class='docstring'>
+  <p>Joins arguments using the <code>delimiter</code>.</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      
+    </h4>
+    <pre><code class='coffeescript'>{{&gt; EditorComponent args id=($join &#39;-&#39; &#39;edit-body&#39; _id)}}</code></pre>
   </div>
-  <div class='method_details'>
-    <p class='signature' id='fromNow-dynamic'>
-      #
-(void)
-<b>fromNow</b><span>(date, withoutSuffix, options)</span>
-      <br>
-    </p>
-    
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>delimiter</span>
+      <span class='type'>
+        (
+          <tt>String</tt>
+        )
+      </span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>String</tt>
+    </li>
+  </ul>
+</div>
   </div>
   <div class='method_details'>
     <p class='signature' id='formatDate-dynamic'>
       #
-(void)
+(String)
 <b>formatDate</b><span>(date, format)</span>
       <br>
     </p>
-    
+    <div class='docstring'>
+  <p><a href="http://momentjs.com/docs/#/displaying/format/">Format</a> a datetime using provided <code>format</code> string.</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      
+    </h4>
+    <pre><code class='coffeescript'>{{formatDate createdAt DEFAULT_DATETIME_FORMAT}}</code></pre>
+  </div>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>date</span>
+      <span class='type'>
+        (
+          <tt>Date</tt>
+        )
+      </span>
+    </li>
+    <li>
+      <span class='name'>format</span>
+      <span class='type'>
+        (
+          <tt>String</tt>
+        )
+      </span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>String</tt>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='fromNow-dynamic'>
+      #
+(String)
+<b>fromNow</b><span>(date, withoutSuffix)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Reactively format a datetime into a relative from now and localized string. As times progresses, string is
+automatically updated. Strings are made using <a href="http://momentjs.com/docs/#/displaying/fromnow/">moment.js <code>fromNow</code> function</a>.</p><p>Example output: <code>3 months ago</code>.</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      
+    </h4>
+    <pre><code class='coffeescript'>&lt;span class=&quot;timestamp&quot; title=&quot;{{formatDate createdAt DEFAULT_DATETIME_FORMAT}}&quot;&gt;{{fromNow createdAt}}&lt;&#47;span&gt;</code></pre>
+  </div>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>date</span>
+      <span class='type'>
+        (
+          <tt>Date</tt>
+        )
+      </span>
+    </li>
+    <li>
+      <span class='name'>withoutSuffix</span>
+      <span class='type'>
+        (
+          <tt>Boolean</tt>
+        )
+      </span>
+      &mdash;
+      <span class='desc'>Should <code>ago</code> suffix be omitted, default is <code>false</code>. </span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>String</tt>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='calendarDate-dynamic'>
+      #
+(String)
+<b>calendarDate</b><span>(date)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Format a datetime into a relative from now and localized string using friendly day names.
+Strings are made using <a href="http://momentjs.com/docs/#/displaying/calendar-time/">moment.js <code>calendar</code> function</a>.</p><p>Example output: <code>last Sunday at 2:30 AM</code>.</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      
+    </h4>
+    <pre><code class='coffeescript'>&lt;span title=&quot;{{formatDate playStart DEFAULT_DATETIME_FORMAT}}&quot;&gt;{{calendarDate playStart}}&lt;&#47;span&gt;</code></pre>
+  </div>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>date</span>
+      <span class='type'>
+        (
+          <tt>Date</tt>
+        )
+      </span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>String</tt>
+    </li>
+  </ul>
+</div>
   </div>
   <div class='method_details'>
     <p class='signature' id='formatDuration-dynamic'>
       #
-(void)
+(String)
 <b>formatDuration</b><span>(from, to, size)</span>
       <br>
     </p>
     <div class='docstring'>
   <div class='note todo'>
     <strong>TODO:</strong>
-    Support internationalization. 
+    Support localization. 
   </div>
-  
+  <p>Similar to <a href="http://momentjs.com/docs/#/durations/humanize/">moment.js <code>humanize</code> function</a> it returns
+a friendly string representing the duration.</p><p>It is build from <code>size</code> number of units. For example, for <code>size</code> equals 2, the string could be <code>2 days 1 hour</code>.
+For <code>size</code> equals 3, <code>2 days 1 hour 44 minutes</code>. If you omit <code>size</code>, full precision is used.</p><p>If <code>from</code> or <code>to</code> are <code>null</code>, the output is reactive.</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      
+    </h4>
+    <pre><code class='coffeescript'>&lt;span title=&quot;{{formatDuration startedAt endedAt}}&quot;&gt;{{formatDuration startedAt endedAt 2}}&lt;&#47;span&gt;</code></pre>
+    <h4>
+      
+    </h4>
+    <pre><code class='coffeescript'>&lt;span title=&quot;{{formatDuration startedAt null}}&quot;&gt;{{formatDuration startedAt null 3}}&lt;&#47;span&gt;</code></pre>
+  </div>
 </div>
 <div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>from</span>
+      <span class='type'>
+        (
+          <tt>Date</tt>
+        )
+      </span>
+      &mdash;
+      <span class='desc'>If <code>null</code>, current time is used. </span>
+    </li>
+    <li>
+      <span class='name'>to</span>
+      <span class='type'>
+        (
+          <tt>Date</tt>
+        )
+      </span>
+      &mdash;
+      <span class='desc'>If <code>null</code>, current time is used. </span>
+    </li>
+    <li>
+      <span class='name'>size</span>
+      <span class='type'>
+        (
+          <tt>Number</tt>
+        )
+      </span>
+      &mdash;
+      <span class='desc'>Duration description precision: from how many units it should be build. </span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>String</tt>
+    </li>
+  </ul>
 </div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='constructDatetime-dynamic'>
-      #
-(void)
-<b>constructDatetime</b><span>(date, time)</span>
-      <br>
-    </p>
-    <div class='docstring'>
-  <p>Construct a date object from inputs of form fields of type &quot;date&quot; and &quot;time&quot;.</p>
-</div>
-<div class='tags'>
-</div>
-  </div>
-  <div class='method_details'>
-    <p class='signature' id='calendarDate-dynamic'>
-      #
-(void)
-<b>calendarDate</b><span>(date)</span>
-      <br>
-    </p>
-    
   </div>
   <div class='method_details'>
     <p class='signature' id='cssPrefix-dynamic'>
@@ -505,6 +759,52 @@ and falls back to old behavior if it is not.</p>
     <li>
       <span class='type'></span>
       <tt>String</tt>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='constructDatetime-dynamic'>
+      #
+(Date)
+<b>constructDatetime</b><span>(date, time)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Construct a <code>Date</code> object from inputs of HTML5 form fields of type <code>date</code> and <code>time</code>.</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      
+    </h4>
+    <pre><code class='coffeescript'>this.constructDatetime(this.$(&#39;[name=&quot;start-date&quot;]&#39;).val(), this.$(&#39;[name=&quot;start-time&quot;]&#39;).val())</code></pre>
+  </div>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>date</span>
+      <span class='type'>
+        (
+          <tt>String</tt>
+        )
+      </span>
+    </li>
+    <li>
+      <span class='name'>time</span>
+      <span class='type'>
+        (
+          <tt>String</tt>
+        )
+      </span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>Date</tt>
     </li>
   </ul>
 </div>
