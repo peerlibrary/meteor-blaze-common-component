@@ -45,7 +45,7 @@ class BlogPostComponent extends AppBaseComponent {
   // Your component for blog posts.
 }
 
-BlogPostComponent.regisiter('BlogPostComponent');
+BlogPostComponent.register('BlogPostComponent');
 ```
 
 In this way it is easy to later on add new features app-wide. And remember, if some feature is very
