@@ -146,7 +146,7 @@ class CommonComponent extends CommonComponentBase
   #
   # @example
   #   {{#if currentUserId}}
-  #     Logged in.
+  #     ...
   #   {{/if}}
   #
   # @return [String]
@@ -170,24 +170,55 @@ class CommonComponent extends CommonComponentBase
 
     Meteor.user userId, fields
 
+  # Returns `true` if any of the arguments is true.
+  #
+  # @example
+  #   {{#if $or isAdmin isModerator}}
+  #     ...
+  #   {{/if}}
+  #
+  # @return [Boolean]
   $or: (args...) ->
     # Removing kwargs.
     args.pop() if args[args.length - 1] instanceof Spacebars.kw
 
     _.some args
 
+  # Returns `true` if all of the arguments are true.
+  #
+  # @example
+  #   {{#if $and currentUserId subscriptionReady}}
+  #     ...
+  #   {{/if}}
+  #
+  # @return [Boolean]
   $and: (args...) ->
     # Removing kwargs.
     args.pop() if args[args.length - 1] instanceof Spacebars.kw
 
     _.every args
 
+  # Returns `true` if the first argument is false, `false` otherwise.
+  #
+  # @example
+  #   {{#if $not isRobot}}
+  #     ...
+  #   {{/if}}
+  #
+  # @return [Boolean]
   $not: (args...) ->
     # Removing kwargs.
     args.pop() if args[args.length - 1] instanceof Spacebars.kw
 
     not args[0]
 
+  # Joins arguments using the `delimiter`.
+  #
+  # @example
+  #   {{> EditorComponent args id=($join '-' 'edit-body' _id)}}
+  #
+  # @param [String] delimiter
+  # @return [String]
   $join: (delimiter, args...) ->
     # Removing kwargs.
     args.pop() if args[args.length - 1] instanceof Spacebars.kw
