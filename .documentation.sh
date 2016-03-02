@@ -15,7 +15,7 @@ echo "Generating documentation..."
 
 npm install -g codo
 
-codo base.coffee --output ./doc --name 'Common Component' --title 'Common Component Documentation' --readme README.md
+codo base.coffee --output ./doc --name 'Common Component' --title 'Common Component Documentation' --readme README.md --undocumented
 
 cd $HOME
 git config --global user.email "travis@travis-ci.org"

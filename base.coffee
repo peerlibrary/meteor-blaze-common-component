@@ -1,3 +1,4 @@
+# @nodoc
 expirationMsFromDuration = (duration) ->
   # Default values from  moment/src/lib/duration/humanize.js.
   thresholds =
@@ -18,6 +19,7 @@ expirationMsFromDuration = (duration) ->
   else
     ((24 * 60 * 60) - seconds % (24 * 60 * 60)) * 1000 + 500
 
+# @nodoc
 invalidateAfter = (expirationMs) ->
   computation = Tracker.currentComputation
   handle = Meteor.setTimeout =>
@@ -225,19 +227,44 @@ class CommonComponent extends CommonComponentBase
 
     args.join delimiter
 
+  # @property [String] Default localized date-time format. Example: `Thu, Sep 4 1986 8:30 PM`.
   DEFAULT_DATETIME_FORMAT:
     'llll'
 
+  # @property [String] Default localized date format. Example: `Sep 4 1986`.
   DEFAULT_DATE_FORMAT:
     'll'
 
+  # @property [String] Default localized time format. Example: `8:30 PM`.
   DEFAULT_TIME_FORMAT:
     'LT'
 
-  fromNow: (date, withoutSuffix, options) ->
-    if withoutSuffix instanceof Spacebars.kw
-      options = withoutSuffix
-      withoutSuffix = false
+  # [Format](http://momentjs.com/docs/#/displaying/format/) a datetime using provided `format` string.
+  #
+  # @example
+  #   {{formatDate createdAt DEFAULT_DATETIME_FORMAT}}
+  #
+  # @param [Date] date
+  # @param [String] format
+  # @return [String]
+  formatDate: (date, format) ->
+    format = null if format instanceof Spacebars.kw
+
+    moment(date).format format
+
+  # Reactively format a datetime into a relative from now and localized string. As times progresses, string is
+  # automatically updated. Strings are made using [moment.js `fromNow` function](http://momentjs.com/docs/#/displaying/fromnow/).
+  #
+  # Example output: `3 months ago`.
+  #
+  # @example
+  #   <span class="timestamp" title="{{formatDate createdAt DEFAULT_DATETIME_FORMAT}}">{{fromNow createdAt}}</span>
+  #
+  # @param [Date] date
+  # @param [Boolean] withoutSuffix Should `ago` suffix be omitted, default is `false`.
+  # @return [String]
+  fromNow: (date, withoutSuffix) ->
+    withoutSuffix = false if withoutSuffix instanceof Spacebars.kw
 
     momentDate = moment(date)
 
@@ -248,12 +275,44 @@ class CommonComponent extends CommonComponentBase
 
     momentDate.fromNow withoutSuffix
 
-  formatDate: (date, format) ->
-    format = null if format instanceof Spacebars.kw
+  # Format a datetime into a relative from now and localized string using friendly day names.
+  # Strings are made using [moment.js `calendar` function](http://momentjs.com/docs/#/displaying/calendar-time/).
+  #
+  # Example output: `last Sunday at 2:30 AM`.
+  #
+  # @example
+  #   <span title="{{formatDate playStart DEFAULT_DATETIME_FORMAT}}">{{calendarDate playStart}}</span>
+  #
+  # @param [Date] date
+  # @return [String]
+  calendarDate: (date) ->
+    moment(date).calendar null,
+      lastDay: '[yesterday at] LT',
+      sameDay: '[today at] LT',
+      nextDay: '[tomorrow at] LT',
+      lastWeek: '[last] dddd [at] LT',
+      nextWeek: 'dddd [at] LT',
+      sameElse: @DEFAULT_DATETIME_FORMAT
 
-    moment(date).format format
-
-  # @todo Support internationalization.
+  # Similar to [moment.js `humanize` function](http://momentjs.com/docs/#/durations/humanize/) it returns
+  # a friendly string representing the duration.
+  #
+  # It is build from `size` number of units. For example, for `size` equals 2, the string could be `2 days 1 hour`.
+  # For `size` equals 3, `2 days 1 hour 44 minutes`. If you omit `size`, full precision is used.
+  #
+  # If `from` or `to` are `null`, the output is reactive.
+  #
+  # @example
+  #   <span title="{{formatDuration startedAt endedAt}}">{{formatDuration startedAt endedAt 2}}</span>
+  #
+  # @example
+  #   <span title="{{formatDuration startedAt null}}">{{formatDuration startedAt null 3}}</span>
+  #
+  # @param [Date] from If `null`, current time is used.
+  # @param [Date] to If `null`, current time is used.
+  # @param [Number] size Duration description precision: from how many units it should be build.
+  # @return [String]
+  # @todo Support localization.
   formatDuration: (from, to, size) ->
     size = null if size instanceof Spacebars.kw
 
@@ -320,24 +379,6 @@ class CommonComponent extends CommonComponentBase
     else
       "less than a minute"
 
-  # Construct a date object from inputs of form fields of type "date" and "time".
-  constructDatetime: (date, time) ->
-    # TODO: Make a warning or something?
-    throw new Error "Both date and time fields are required together." if (date and not time) or (time and not date)
-
-    return null unless date and time
-
-    moment("#{date} #{time}", 'YYYY-MM-DD HH:mm').toDate()
-
-  calendarDate: (date) ->
-    moment(date).calendar null,
-      lastDay: '[yesterday at] LT',
-      sameDay: '[today at] LT',
-      nextDay: '[tomorrow at] LT',
-      lastWeek: '[last] dddd [at] LT',
-      nextWeek: 'dddd [at] LT',
-      sameElse: @DEFAULT_DATETIME_FORMAT
-
   # Returns the CSS prefix used by the current browser.
   #
   # @return [String]
@@ -346,6 +387,22 @@ class CommonComponent extends CommonComponentBase
       styles = window.getComputedStyle document.documentElement, ''
       @_cssPrefix = (_.toArray(styles).join('').match(/-(moz|webkit|ms)-/) or (styles.OLink is '' and ['', 'o']))[1]
     @_cssPrefix
+
+  # Construct a `Date` object from inputs of HTML5 form fields of type `date` and `time`.
+  #
+  # @example
+  #   this.constructDatetime(this.$('[name="start-date"]').val(), this.$('[name="start-time"]').val())
+  #
+  # @param [String] date
+  # @param [String] time
+  # @return [Date]
+  constructDatetime: (date, time) ->
+    # TODO: Make a warning or something?
+    throw new Error "Both date and time fields are required together." if (date and not time) or (time and not date)
+
+    return null unless date and time
+
+    moment("#{date} #{time}", 'YYYY-MM-DD HH:mm').toDate()
 
 # A base class for mixins which calls the following methods on the
 # [mixin parent](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_mixinParent)
