@@ -84,22 +84,38 @@ This allows you to use mixins which add animations to your components.</p>
     <span class='signature'>
       <a href='#pathFor-dynamic'>
         #
-(void)
+(String)
 <b>pathFor</b><span>(pathName, kwargs)</span>
       </a>
     </span>
     <span class='desc'>
+      Template helper which resolves <a href="https://github.com/kadirahq/flow-router">Flow Router</a> path definition and arguments to URL paths using <a href="https://github.com/kadirahq/flow-router#flowrouterpathpathdef-params-queryparams"><code>FlowRouter.path</code></a>.
+
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#currentUserId-dynamic'>
+        #
+(String)
+<b>currentUserId</b><span>()</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Returns the <a href="http://docs.meteor.com/#/full/meteor_users"><code>Meteor.userId()</code></a> value. 
     </span>
   </li>
   <li>
     <span class='signature'>
       <a href='#currentUser-dynamic'>
         #
-(void)
-<b>currentUser</b><span>()</span>
+(Object)
+<b>currentUser</b><span>(userId, fields)</span>
       </a>
     </span>
     <span class='desc'>
+      Extended version of <a href="http://docs.meteor.com/#/full/template_currentuser"><code>currentUser</code></a> template helper which can optionally limit fields returned in the user object.
+
     </span>
   </li>
   <li>
@@ -177,7 +193,6 @@ This allows you to use mixins which add animations to your components.</p>
       </a>
     </span>
     <span class='desc'>
-      TODO: Support internationalization. 
     </span>
   </li>
   <li>
@@ -207,11 +222,12 @@ This allows you to use mixins which add animations to your components.</p>
     <span class='signature'>
       <a href='#cssPrefix-dynamic'>
         #
-(void)
+(String)
 <b>cssPrefix</b><span>()</span>
       </a>
     </span>
     <span class='desc'>
+      Returns the CSS prefix used by the current browser. 
     </span>
   </li>
 </ul>
@@ -232,20 +248,153 @@ This allows you to use mixins which add animations to your components.</p>
   <div class='method_details'>
     <p class='signature' id='pathFor-dynamic'>
       #
-(void)
+(String)
 <b>pathFor</b><span>(pathName, kwargs)</span>
       <br>
     </p>
-    
+    <div class='docstring'>
+  <p>Template helper which resolves <a href="https://github.com/kadirahq/flow-router">Flow Router</a> path definition and arguments to
+URL paths using <a href="https://github.com/kadirahq/flow-router#flowrouterpathpathdef-params-queryparams"><code>FlowRouter.path</code></a>.
+It works when Flow Router package is available.</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      
+    </h4>
+    <pre><code class='coffeescript'>{{pathFor &#39;Post.edit&#39; params=data}}</code></pre>
+  </div>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>pathName</span>
+      <span class='type'>
+        (
+          <tt>String</tt>
+        )
+      </span>
+      &mdash;
+      <span class='desc'>Path name or path definition. </span>
+    </li>
+    <li>
+      <span class='name'>kwargs</span>
+      <span class='type'>
+        (
+          <tt>Object</tt>
+        )
+      </span>
+    </li>
+  </ul>
+  <h3>
+    Options Hash:
+    (kwargs):
+  </h3>
+  <ul class='options'>
+    <li>
+      <span class='name'>params</span>
+      <span class='type'>
+        (
+          <tt>Object</tt>
+        )
+      </span>
+      &mdash;
+      <span class='desc'>Parameters to resolve variables in the path. </span>
+    </li>
+    <li>
+      <span class='name'>query</span>
+      <span class='type'>
+        (
+          <tt>Object</tt>
+        )
+      </span>
+      &mdash;
+      <span class='desc'>Query string values to be added to the URL path. </span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>String</tt>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='currentUserId-dynamic'>
+      #
+(String)
+<b>currentUserId</b><span>()</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Returns the <a href="http://docs.meteor.com/#/full/meteor_users"><code>Meteor.userId()</code></a> value.
+Use it instead of <a href="http://docs.meteor.com/#/full/template_currentuser"><code>currentUser</code></a> template helper when you want
+to check only if user is logged in or not.</p>
+  <div class='examples'>
+    <h3>Examples:</h3>
+    <h4>
+      
+    </h4>
+    <pre><code class='coffeescript'>{{#if currentUserId}}
+  Logged in.
+{{&#47;if}}</code></pre>
+  </div>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>String</tt>
+    </li>
+  </ul>
+</div>
   </div>
   <div class='method_details'>
     <p class='signature' id='currentUser-dynamic'>
       #
-(void)
-<b>currentUser</b><span>()</span>
+(Object)
+<b>currentUser</b><span>(userId, fields)</span>
       <br>
     </p>
-    
+    <div class='docstring'>
+  <p>Extended version of <a href="http://docs.meteor.com/#/full/template_currentuser"><code>currentUser</code></a> template helper which
+can optionally limit fields returned in the user object. This limits template helper&#39;s reactivity as well.
+It works when <a href="https://github.com/peerlibrary/meteor-user-extra">peerlibrary:user-extra</a> package is available
+and falls back to old behavior if it is not.</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>userId</span>
+      <span class='type'>
+        (
+          <tt>String</tt>
+        )
+      </span>
+    </li>
+    <li>
+      <span class='name'>fields</span>
+      <span class='type'>
+        (
+          <tt>Object</tt>
+        )
+      </span>
+      &mdash;
+      <span class='desc'><a href="http://docs.meteor.com/#/full/fieldspecifiers">MongoDB fields specifier</a>. </span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>Object</tt>
+    </li>
+  </ul>
+</div>
   </div>
   <div class='method_details'>
     <p class='signature' id='$or-dynamic'>
@@ -309,7 +458,11 @@ This allows you to use mixins which add animations to your components.</p>
       <br>
     </p>
     <div class='docstring'>
-  <p>TODO: Support internationalization.</p>
+  <div class='note todo'>
+    <strong>TODO:</strong>
+    Support internationalization. 
+  </div>
+  
 </div>
 <div class='tags'>
 </div>
@@ -339,11 +492,22 @@ This allows you to use mixins which add animations to your components.</p>
   <div class='method_details'>
     <p class='signature' id='cssPrefix-dynamic'>
       #
-(void)
+(String)
 <b>cssPrefix</b><span>()</span>
       <br>
     </p>
-    
+    <div class='docstring'>
+  <p>Returns the CSS prefix used by the current browser.</p>
+</div>
+<div class='tags'>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>String</tt>
+    </li>
+  </ul>
+</div>
   </div>
 </div>
     </div>
