@@ -70,11 +70,24 @@
       <a href='#ancestorComponent-dynamic'>
         #
 (BlazeComponent)
-<b>ancestorComponent</b><span>(componentClass)</span>
+<b>ancestorComponent</b><span>(nameOrComponent)</span>
       </a>
     </span>
     <span class='desc'>
-      Traverses the components tree towards the root and returns the first component which is an instance of <code>componentClass</code>.
+      Traverses the components tree towards the root and returns the first component which matches the provided component name, class, or instance.
+
+    </span>
+  </li>
+  <li>
+    <span class='signature'>
+      <a href='#ancestorComponentWith-dynamic'>
+        #
+(BlazeComponent)
+<b>ancestorComponentWith</b><span>(propertyOrMatcherOrFunction)</span>
+      </a>
+    </span>
+    <span class='desc'>
+      Traverses the components tree towards the root and finds the first component which matches a <code>propertyOrMatcherOrFunction</code> predicate.
 
     </span>
   </li>
@@ -87,7 +100,7 @@
       </a>
     </span>
     <span class='desc'>
-      Traverses the components tree towards the root and finds the first component with a property <code>propertyName</code> and if it is a function, calls it with <code>args</code> arguments, otherwise returns the value of the property.
+      Traverses the components tree towards the root and finds the first component with a property <code>propertyName</code>, and if it is a function, calls it with <code>args</code> arguments, otherwise returns the value of the property.
 
     </span>
   </li>
@@ -119,21 +132,60 @@ which logs errors to the console if no error callback is specified.</p>
     <p class='signature' id='ancestorComponent-dynamic'>
       #
 (BlazeComponent)
-<b>ancestorComponent</b><span>(componentClass)</span>
+<b>ancestorComponent</b><span>(nameOrComponent)</span>
       <br>
     </p>
     <div class='docstring'>
-  <p>Traverses the components tree towards the root and returns the first component which is an instance of
-<code>componentClass</code>.</p>
+  <p>Traverses the components tree towards the root and returns the first component which matches the
+provided component name, class, or instance.</p><p>Returns <code>null</code> if such component is not found.</p><p>It returns a strict ancestor, it does not check the component itself first.</p>
 </div>
 <div class='tags'>
   <h3>Parameters:</h3>
   <ul class='param'>
     <li>
-      <span class='name'>componentClass</span>
+      <span class='name'>nameOrComponent</span>
       <span class='type'>
         (
-          <tt>Class&lt;componentClass&gt;</tt>
+          <tt>String, Class&lt;BlazeComponent&gt;, BlazeComponent</tt>
+        )
+      </span>
+    </li>
+  </ul>
+  <h3>Returns:</h3>
+  <ul class='return'>
+    <li>
+      <span class='type'></span>
+      <tt>BlazeComponent</tt>
+    </li>
+  </ul>
+</div>
+  </div>
+  <div class='method_details'>
+    <p class='signature' id='ancestorComponentWith-dynamic'>
+      #
+(BlazeComponent)
+<b>ancestorComponentWith</b><span>(propertyOrMatcherOrFunction)</span>
+      <br>
+    </p>
+    <div class='docstring'>
+  <p>Traverses the components tree towards the root and finds the first component which matches a
+<code>propertyOrMatcherOrFunction</code> predicate.</p><p>Returns <code>null</code> if such component is not found.</p><p>A <code>propertyOrMatcherOrFunction</code> predicate can be:</p><ul>
+<li>a property name string, in this case the first component which has a property with the given name is matched</li>
+<li>a matcher object specifying mapping between property names and their values, in this case the first component
+which has all properties fom the matcher object equal to given values is matched (if a property is a function, it
+is called and its return value is compared instead)</li>
+<li>a function which receives <code>(ancestor, component)</code> with <code>this</code> bound to <code>component</code>, in this case the first component
+for which the function returns a true value is matched</li>
+</ul><p>It returns a strict ancestor, it does not check the component itself first.</p>
+</div>
+<div class='tags'>
+  <h3>Parameters:</h3>
+  <ul class='param'>
+    <li>
+      <span class='name'>propertyOrMatcherOrFunction</span>
+      <span class='type'>
+        (
+          <tt>String, Object, Function</tt>
         )
       </span>
     </li>
@@ -155,8 +207,8 @@ which logs errors to the console if no error callback is specified.</p>
       <br>
     </p>
     <div class='docstring'>
-  <p>Traverses the components tree towards the root and finds the first component with a property <code>propertyName</code>
-and if it is a function, calls it with <code>args</code> arguments, otherwise returns the value of the property.</p>
+  <p>Traverses the components tree towards the root and finds the first component with a property <code>propertyName</code>,
+and if it is a function, calls it with <code>args</code> arguments, otherwise returns the value of the property.</p><p>Returns <code>undefined</code> if such component is not found.</p><p>It calls a strict ancestor, it does not check the component itself first.</p>
 </div>
 <div class='tags'>
   <h3>Parameters:</h3>
