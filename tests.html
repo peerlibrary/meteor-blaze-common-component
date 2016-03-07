@@ -1,0 +1,19 @@
+<template name="testLevelOneComponent">
+  <div class="testLevelOneComponent">
+    {{> LevelOneComponent}}
+  </div>
+</template>
+
+<template name="LevelOneComponent">
+ {{> LevelTwoComponent}}
+</template>
+
+<template name="LevelTwoComponent">
+  {{> MainComponent}}
+</template>
+
+<template name="MainComponent">
+  <span>{{topValue}}</span>
+  <span>{{hasValue}}</span>
+  <span>{{hasNoValue}}</span>
+</template>

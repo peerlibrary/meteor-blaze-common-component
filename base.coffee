@@ -136,7 +136,7 @@ class CommonComponentBase extends BlazeComponent
     propertyOrMatcherOrFunction = createMatcher propertyOrMatcherOrFunction, true
 
     component = @component().parentComponent()
-    while component and propertyOrMatcherOrFunction.call @, component, @
+    while component and not propertyOrMatcherOrFunction.call @, component, @
       component = component.parentComponent()
     component
 

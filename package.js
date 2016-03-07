@@ -41,12 +41,15 @@ Package.onUse(function (api) {
 Package.onTest(function (api) {
   // Core dependencies.
   api.use([
-    'coffeescript'
+    'coffeescript',
+    'jquery',
+    'tracker'
   ]);
 
   // Internal dependencies.
   api.use([
-    'peerlibrary:blaze-common-component'
+    'peerlibrary:blaze-common-component',
+    'peerlibrary:blaze-components@0.18.0'
   ]);
 
   // 3rd party dependencies.
@@ -55,6 +58,8 @@ Package.onTest(function (api) {
   ]);
 
   api.addFiles([
-    'tests.coffee'
+    'tests.html',
+    'tests.coffee',
+    'tests.css'
    ]);
 });
