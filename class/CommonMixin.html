@@ -41,35 +41,8 @@
       </table>
       <h2>Overview</h2>
       <div class='docstring'>
-  <p>A base class for mixins which calls the following methods on the
-<a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_mixinParent">mixin parent</a>
-instead of the mixin itself:</p><ul>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_$"><code>$</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_find"><code>find</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_findAll"><code>findAll</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_firstNode"><code>firstNode</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_lastNode"><code>lastNode</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_data"><code>data</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_component"><code>component</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_parentComponent"><code>parentComponent</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_childComponents"><code>childComponents</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_childComponentsWith"><code>childComponentsWith</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_isCreated"><code>isCreated</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_isRendered"><code>isRendered</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_isDestroyed"><code>isDestroyed</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_renderComponent"><code>renderComponent</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_removeComponent"><code>removeComponent</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_renderComponentToHTML"><code>renderComponentToHTML</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_autorun"><code>autorun</code></a></li>
-<li><a href='../class/CommonComponentBase.html#subscribe-dynamic'><code>subscribe</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_subscriptionsReady"><code>subscriptionsReady</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_getMixin"><code>getMixin</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_getFirstWith"><code>getFirstWith</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_callFirstWith"><code>callFirstWith</code></a></li>
-<li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_requireMixin"><code>requireMixin</code></a></li>
-<li><a href='../class/CommonComponentBase.html#ancestorComponent-dynamic'><code>ancestorComponent</code></a></li>
-<li><a href='../class/CommonComponentBase.html#callAncestorWith-dynamic'><code>callAncestorWith</code></a></li>
-</ul><p>The following class methods are not available for mixins and throw an error:</p><ul>
+  <p>A base class for mixins.</p><p>The class throws a more meaningful error for the following class methods which are not available
+for mixins:</p><ul>
 <li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_class_register"><code>register</code></a></li>
 <li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_class_renderComponent"><code>renderComponent</code></a></li>
 <li><a href="https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_class_renderComponentToHTML"><code>renderComponentToHTML</code></a></li>

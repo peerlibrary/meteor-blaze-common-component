@@ -100,7 +100,7 @@
       </a>
     </span>
     <span class='desc'>
-      Traverses the components tree towards the root and finds the first component with a property <code>propertyName</code>, and if it is a function, calls it with <code>args</code> arguments, otherwise returns the value of the property.
+      Traverses the components tree towards the root and finds the first component (or its mixin) with a property <code>propertyName</code>, and if it is a function, calls it with <code>args</code> arguments, otherwise returns the value of the property.
 
     </span>
   </li>
@@ -170,10 +170,11 @@ provided component name, class, or instance.</p><p>Returns <code>null</code> if 
     <div class='docstring'>
   <p>Traverses the components tree towards the root and finds the first component which matches a
 <code>propertyOrMatcherOrFunction</code> predicate.</p><p>Returns <code>null</code> if such component is not found.</p><p>A <code>propertyOrMatcherOrFunction</code> predicate can be:</p><ul>
-<li>a property name string, in this case the first component which has a property with the given name is matched</li>
+<li>a property name string, in this case the first component which has a property with the given name
+(or its mixins do) is matched</li>
 <li>a matcher object specifying mapping between property names and their values, in this case the first component
-which has all properties fom the matcher object equal to given values is matched (if a property is a function, it
-is called and its return value is compared instead)</li>
+which (or its mixins) has all properties from the matcher object equal to given values is matched
+(if a property is a function, it is called and its return value is compared instead)</li>
 <li>a function which receives <code>(ancestor, component)</code> with <code>this</code> bound to <code>component</code>, in this case the first component
 for which the function returns a true value is matched</li>
 </ul><p>It returns a strict ancestor, it does not check the component itself first.</p>
@@ -207,7 +208,7 @@ for which the function returns a true value is matched</li>
       <br>
     </p>
     <div class='docstring'>
-  <p>Traverses the components tree towards the root and finds the first component with a property <code>propertyName</code>,
+  <p>Traverses the components tree towards the root and finds the first component (or its mixin) with a property <code>propertyName</code>,
 and if it is a function, calls it with <code>args</code> arguments, otherwise returns the value of the property.</p><p>Returns <code>undefined</code> if such component is not found.</p><p>It calls a strict ancestor, it does not check the component itself first.</p>
 </div>
 <div class='tags'>
