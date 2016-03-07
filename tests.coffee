@@ -64,4 +64,13 @@ class CommonComponentTestCase extends ClassyTestCase
       Blaze.remove @renderedComponent
   ]
 
+  testAncestors: ->
+    output = CommonComponent.getComponent('LevelOneComponent').renderComponentToHTML null, null
+
+    @assertEqual trim(output), trim """
+      <span>41</span>
+      <span>42</span>
+      <span></span>
+    """
+
 ClassyTestCase.addTest new CommonComponentTestCase()
