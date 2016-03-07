@@ -31,14 +31,14 @@ invalidateAfter = (expirationMs) ->
     handle = null
 
 # @nodoc
-# TODO: Deduplicate between base component, blaze component, and common component packages.
-createMatcher = (propertyOrMatcherOrFunction) ->
+# TODO: Deduplicate between blaze component and common component packages.
+createMatcher = (propertyOrMatcherOrFunction, checkMixins) ->
   if _.isString propertyOrMatcherOrFunction
     property = propertyOrMatcherOrFunction
     propertyOrMatcherOrFunction = (child, parent) =>
       # If child is parent, we might get into an infinite loop if this is
       # called from getFirstWith, so in that case we do not use getFirstWith.
-      if child isnt parent and child.getFirstWith
+      if checkMixins and child isnt parent and child.getFirstWith
         !!child.getFirstWith null, property
       else
         property of child
@@ -50,7 +50,7 @@ createMatcher = (propertyOrMatcherOrFunction) ->
       for property, value of matcher
         # If child is parent, we might get into an infinite loop if this is
         # called from getFirstWith, so in that case we do not use getFirstWith.
-        if child isnt parent and child.getFirstWith
+        if checkMixins and child isnt parent and child.getFirstWith
           childWithProperty = child.getFirstWith null, property
         else
           childWithProperty = child if property of child
@@ -117,10 +117,11 @@ class CommonComponentBase extends BlazeComponent
   # Returns `null` if such component is not found.
   #
   # A `propertyOrMatcherOrFunction` predicate can be:
-  # * a property name string, in this case the first component which has a property with the given name is matched
+  # * a property name string, in this case the first component which has a property with the given name
+  # (or its mixins do) is matched
   # * a matcher object specifying mapping between property names and their values, in this case the first component
-  # which has all properties fom the matcher object equal to given values is matched (if a property is a function, it
-  # is called and its return value is compared instead)
+  # which (or its mixins) has all properties from the matcher object equal to given values is matched
+  # (if a property is a function, it is called and its return value is compared instead)
   # * a function which receives `(ancestor, component)` with `this` bound to `component`, in this case the first component
   # for which the function returns a true value is matched
   #
@@ -131,14 +132,15 @@ class CommonComponentBase extends BlazeComponent
   ancestorComponentWith: (propertyOrMatcherOrFunction) ->
     assert propertyOrMatcherOrFunction
 
-    propertyOrMatcherOrFunction = createMatcher propertyOrMatcherOrFunction
+    # When checking for properties we check mixins as well.
+    propertyOrMatcherOrFunction = createMatcher propertyOrMatcherOrFunction, true
 
-    component = @parentComponent()
+    component = @component().parentComponent()
     while component and propertyOrMatcherOrFunction.call @, component, @
       component = component.parentComponent()
     component
 
-  # Traverses the components tree towards the root and finds the first component with a property `propertyName`,
+  # Traverses the components tree towards the root and finds the first component (or its mixin) with a property `propertyName`,
   # and if it is a function, calls it with `args` arguments, otherwise returns the value of the property.
   #
   # Returns `undefined` if such component is not found.
@@ -152,6 +154,8 @@ class CommonComponentBase extends BlazeComponent
 
     component = @ancestorComponentWith propertyName
 
+    # We are calling callFirstWith on the component because here we are not
+    # traversing mixins but components themselves so we have to recurse once more.
     # Components should always have callFirstWith.
     component?.callFirstWith null, propertyName, args...
 
@@ -484,37 +488,10 @@ class CommonComponent extends CommonComponentBase
 
     moment("#{date} #{time}", 'YYYY-MM-DD HH:mm').toDate()
 
-# A base class for mixins which calls the following methods on the
-# [mixin parent](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_mixinParent)
-# instead of the mixin itself:
+# A base class for mixins.
 #
-# * [`$`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_$)
-# * [`find`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_find)
-# * [`findAll`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_findAll)
-# * [`firstNode`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_firstNode)
-# * [`lastNode`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_lastNode)
-# * [`data`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_data)
-# * [`component`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_component)
-# * [`parentComponent`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_parentComponent)
-# * [`childComponents`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_childComponents)
-# * [`childComponentsWith`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_childComponentsWith)
-# * [`isCreated`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_isCreated)
-# * [`isRendered`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_isRendered)
-# * [`isDestroyed`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_isDestroyed)
-# * [`renderComponent`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_renderComponent)
-# * [`removeComponent`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_removeComponent)
-# * [`renderComponentToHTML`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_renderComponentToHTML)
-# * [`autorun`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_autorun)
-# * {CommonComponentBase#subscribe `subscribe`}
-# * [`subscriptionsReady`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_subscriptionsReady)
-# * [`getMixin`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_getMixin)
-# * [`getFirstWith`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_getFirstWith)
-# * [`callFirstWith`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_callFirstWith)
-# * [`requireMixin`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_requireMixin)
-# * {CommonComponentBase#ancestorComponent `ancestorComponent`}
-# * {CommonComponentBase#callAncestorWith `callAncestorWith`}
-#
-# The following class methods are not available for mixins and throw an error:
+# The class throws a more meaningful error for the following class methods which are not available
+# for mixins:
 #
 # * [`register`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_class_register)
 # * [`renderComponent`](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_class_renderComponent)
@@ -525,10 +502,3 @@ class CommonMixin extends CommonComponentBase
 for classMethod in ['register', 'renderComponent', 'renderComponentToHTML']
   CommonMixin[classMethod] = ->
     throw new Error "Not available for mixins."
-
-for method in ['$', 'find', 'findAll', 'firstNode', 'lastNode', 'data', 'component', 'parentComponent',
-               'childComponents', 'childComponentsWith', 'isCreated', 'isRendered', 'isDestroyed', 'renderComponent',
-               'removeComponent', 'renderComponentToHTML', 'autorun', 'subscribe', 'subscriptionsReady', 'getMixin',
-               'getFirstWith', 'callFirstWith', 'requireMixin', 'ancestorComponent', 'callAncestorWith']
-  CommonMixin::[method] = (args...) ->
-    @mixinParent()[method] args...
