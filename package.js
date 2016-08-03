@@ -34,7 +34,9 @@ Package.onUse(function (api) {
   api.export('CommonMixin');
 
   api.addFiles([
-    'base.coffee'
+    'base.coffee',
+    'component.coffee',
+    'mixin.coffee'
   ]);
 });
 
