@@ -1,12 +1,12 @@
 Package.describe({
   name: 'peerlibrary:blaze-common-component',
   summary: "An extended base Blaze Component with common features",
-  version: '0.2.0',
+  version: '0.3.0',
   git: 'https://github.com/peerlibrary/meteor-blaze-common-component.git'
 });
 
 Package.onUse(function (api) {
-  api.versionsFrom('1.2.0.2');
+  api.versionsFrom('1.4.0.1');
 
   // Core dependencies.
   api.use([
