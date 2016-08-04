@@ -18,7 +18,7 @@ Package.onUse(function (api) {
 
   // 3rd party dependencies.
   api.use([
-    'peerlibrary:blaze-components@0.18.0',
+    'peerlibrary:blaze-components@0.19.0',
     'momentjs:moment@2.11.2',
     'peerlibrary:assert@0.2.5'
   ]);
@@ -51,7 +51,7 @@ Package.onTest(function (api) {
   // Internal dependencies.
   api.use([
     'peerlibrary:blaze-common-component',
-    'peerlibrary:blaze-components@0.18.0'
+    'peerlibrary:blaze-components@0.19.0'
   ]);
 
   // 3rd party dependencies.
