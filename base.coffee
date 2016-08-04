@@ -1,36 +1,4 @@
 # @nodoc
-expirationMsFromDuration = (duration) ->
-  # Default values from  moment/src/lib/duration/humanize.js.
-  thresholds =
-    s: 45 # seconds to minute
-    m: 45 # minutes to hour
-    h: 22 # hours to day
-
-  seconds = Math.round(duration.as 's')
-  minutes = Math.round(duration.as 'm')
-  hours = Math.round(duration.as 'h')
-
-  if seconds < thresholds.s
-    (thresholds.s - seconds) * 1000 + 500
-  else if minutes < thresholds.m
-    (60 - seconds % 60) * 1000 + 500
-  else if hours < thresholds.h
-    ((60 * 60) - seconds % (60 * 60)) * 1000 + 500
-  else
-    ((24 * 60 * 60) - seconds % (24 * 60 * 60)) * 1000 + 500
-
-# @nodoc
-invalidateAfter = (expirationMs) ->
-  computation = Tracker.currentComputation
-  handle = Meteor.setTimeout =>
-    computation.invalidate()
-  ,
-    expirationMs
-  computation.onInvalidate =>
-    Meteor.clearTimeout handle if handle
-    handle = null
-
-# @nodoc
 # TODO: Deduplicate between blaze component and common component packages.
 createMatcher = (propertyOrMatcherOrFunction, checkMixins) ->
   if _.isString propertyOrMatcherOrFunction
