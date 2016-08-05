@@ -13,7 +13,8 @@ Package.onUse(function (api) {
     'coffeescript',
     'underscore',
     'spacebars',
-    'tracker'
+    'tracker',
+    'modules'
   ]);
 
   // 3rd party dependencies.
@@ -34,7 +35,6 @@ Package.onUse(function (api) {
   api.export('CommonMixin');
 
   api.addFiles([
-    'base.coffee',
     'component.coffee',
     'mixin.coffee'
   ]);

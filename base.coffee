@@ -34,7 +34,7 @@ createMatcher = (propertyOrMatcherOrFunction, checkMixins) ->
   propertyOrMatcherOrFunction
 
 # A common base class for both {CommonComponent} and {CommonMixin}.
-class share.CommonComponentBase extends BlazeComponent
+class CommonComponentBase extends BlazeComponent
   # A version of [subscribe](https://github.com/peerlibrary/meteor-blaze-components#user-content-reference_instance_subscribe)
   # which logs errors to the console if no error callback is specified.
   #
@@ -126,3 +126,5 @@ class share.CommonComponentBase extends BlazeComponent
     # traversing mixins but components themselves so we have to recurse once more.
     # Components should always have callFirstWith.
     component?.callFirstWith null, propertyName, args...
+
+module.exports.CommonComponentBase = CommonComponentBase

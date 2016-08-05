@@ -1,3 +1,5 @@
+{CommonComponentBase} = require './base.coffee'
+
 # @nodoc
 expirationMsFromDuration = (duration) ->
   # Default values from  moment/src/lib/duration/humanize.js.
@@ -39,7 +41,7 @@ invalidateAfter = (expirationMs) ->
 # configured to call corresponding methods in mixins, if they exist, as it is
 # described [in Blaze Components documentation](https://github.com/peerlibrary/meteor-blaze-components#animations).
 # This allows you to use mixins which add animations to your components.
-class CommonComponent extends share.CommonComponentBase
+class CommonComponent extends CommonComponentBase
   # @nodoc
   insertDOMElement: (parent, node, before, next) ->
     next ?= =>
