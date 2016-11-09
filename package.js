@@ -1,7 +1,7 @@
 Package.describe({
   name: 'peerlibrary:blaze-common-component',
   summary: "An extended base Blaze Component with common features",
-  version: '0.4.0',
+  version: '0.4.1',
   git: 'https://github.com/peerlibrary/meteor-blaze-common-component.git'
 });
 
@@ -18,8 +18,8 @@ Package.onUse(function (api) {
 
   // 3rd party dependencies.
   api.use([
-    'peerlibrary:blaze-components@0.19.0',
-    'momentjs:moment@2.11.2',
+    'peerlibrary:blaze-components@0.20.0',
+    'momentjs:moment@2.15.2',
     'peerlibrary:assert@0.2.5'
   ]);
 
@@ -51,12 +51,12 @@ Package.onTest(function (api) {
   // Internal dependencies.
   api.use([
     'peerlibrary:blaze-common-component',
-    'peerlibrary:blaze-components@0.19.0'
+    'peerlibrary:blaze-components@0.20.0'
   ]);
 
   // 3rd party dependencies.
   api.use([
-    'peerlibrary:classy-test@0.2.24'
+    'peerlibrary:classy-test@0.2.26'
   ]);
 
   api.addFiles([
