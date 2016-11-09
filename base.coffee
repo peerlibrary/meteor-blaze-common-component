@@ -50,7 +50,7 @@ class share.CommonComponentBase extends BlazeComponent
 
     unless callbacks.onError or callbacks.onStop
       callbacks.onStop = (error) =>
-        console.error "Subscription '#{args[0]}' error", error if error
+        console.error "Subscription '#{name}' error", error if error
 
     args.push callbacks
 
