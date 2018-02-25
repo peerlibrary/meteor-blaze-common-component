@@ -41,6 +41,8 @@ Package.onUse(function (api) {
 });
 
 Package.onTest(function (api) {
+  api.versionsFrom('1.4.0.1');
+
   // Core dependencies.
   api.use([
     'coffeescript',
