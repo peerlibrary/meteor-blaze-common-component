@@ -1,7 +1,7 @@
 Package.describe({
   name: 'peerlibrary:blaze-common-component',
   summary: "An extended base Blaze Component with common features",
-  version: '0.4.2',
+  version: '0.4.3',
   git: 'https://github.com/peerlibrary/meteor-blaze-common-component.git'
 });
 
@@ -27,7 +27,7 @@ Package.onUse(function (api) {
   api.use([
     'peerlibrary:flow-router@2.12.1_1',
     'kadira:flow-router@2.12.1',
-    'peerlibrary:user-extra@0.4.0'
+    'peerlibrary:user-extra@0.3.0'
   ], {weak: true});
 
   api.export('CommonComponent');
